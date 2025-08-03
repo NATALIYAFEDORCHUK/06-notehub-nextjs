@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import css from "./NoteDetails.module.css";
 
