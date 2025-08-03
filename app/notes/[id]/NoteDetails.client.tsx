@@ -1,3 +1,5 @@
+"use client"
+
 import css from "./NoteDetails.module.css";
 
 import { useQuery } from "@tanstack/react-query";
