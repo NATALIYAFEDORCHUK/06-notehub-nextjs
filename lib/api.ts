@@ -21,33 +21,6 @@ interface FetchNotesParams {
   perPage?: number;
 }
 
-// export const fetchNotes = async ({
-//   query = "",
-//   page = 1,
-//   perPage = 12,
-// }: FetchNotesParams): Promise<FetchNotesResponse> => {
-//   const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
-
-//   const params: Record<string, string | number> = {
-//     page,
-//     perPage,
-//   };
-//   if (query.trim()) {
-//     params.search = query.trim();
-//   }
-
-//   const config = {
-//     params,
-//     headers: {
-//       Accept: "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//   };
-
-//   const res = await axios.get<FetchNotesResponse>("/notes", config);
-//   return res.data;
-// };
-
 export const fetchNotes = async ({
   query = "",
   page = 1,
@@ -63,21 +36,15 @@ export const fetchNotes = async ({
     params.search = query.trim();
   }
 
-  console.log("📦 Fetching notes with config:", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    params,
-  });
-
-  const res = await axios.get<FetchNotesResponse>("/notes", {
+  const config = {
     params,
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  };
 
+  const res = await axios.get<FetchNotesResponse>("/notes", config);
   return res.data;
 };
 
@@ -94,7 +61,7 @@ export const createNote = async (noteData: CreateNoteData): Promise<Note> => {
   return res.data;
 };
 
-export const deleteNote = async (noteId: number): Promise<Note> => {
+export const deleteNote = async (noteId: string): Promise<Note> => {
   const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
   const config = {
