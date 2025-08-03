@@ -17,7 +17,7 @@ export default function NoteList({ notes }: NoteListProps) {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
     },
   });
-  const handleDelete = (noteId: number) => {
+  const handleDelete = (noteId: string) => {
     deleteNoteMutation.mutate(noteId);
   };
 
